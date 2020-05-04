@@ -96,7 +96,7 @@ public class AirdetailController {
 
     @ApiOperation("按事件原因查询")
     @GetMapping("airwhyselect")
-    public Result<List<Airdetail>> airwhyselect(String airwhy) {
+    public Result<List<Airdetail>> airwhyselect( String airwhy) {
         Example record = Example.builder(Airdetail.class)
                 .where(WeekendSqls.<Airdetail>custom()
                         .andLike(Airdetail::getAirwhy, "%" + airwhy + "%")

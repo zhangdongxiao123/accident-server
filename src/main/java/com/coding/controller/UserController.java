@@ -15,6 +15,8 @@ import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -35,6 +37,7 @@ public class UserController {
     private final UserService userService;
     private final MinIOFileService fileService;
     private final ManagerMapper managerMapper;
+
 
 
     //登录
@@ -79,14 +82,14 @@ public class UserController {
     }
 
 
-//    @ApiOperation("上传图片")
-//    @PostMapping("upload")
-//    public Result<String> userInfo(MultipartFile file) throws IOException, NoSuchAlgorithmException, RegionConflictException, InvalidKeyException, InvalidPortException, InvalidResponseException, ErrorResponseException, XmlParserException, InvalidBucketNameException, InsufficientDataException, InvalidEndpointException, InternalException {
-//        String url = fileService.upload(file.getInputStream(), file.getOriginalFilename());
-//        Result<String> bySuccess = Result.createBySuccess(url);
-//        log.info("url:{}", bySuccess);
-//        return bySuccess;
-//    }
+    @ApiOperation("上传图片")
+    @PostMapping("upload")
+    public Result<String> userInfo(MultipartFile file) throws IOException, NoSuchAlgorithmException, RegionConflictException, InvalidKeyException, InvalidPortException, InvalidResponseException, ErrorResponseException, XmlParserException, InvalidBucketNameException, InsufficientDataException, InvalidEndpointException, InternalException {
+        String url = fileService.upload(file.getInputStream(), file.getOriginalFilename());
+        Result<String> bySuccess = Result.createBySuccess(url);
+        log.info("url:{}", bySuccess);
+        return bySuccess;
+    }
 
 
 }
