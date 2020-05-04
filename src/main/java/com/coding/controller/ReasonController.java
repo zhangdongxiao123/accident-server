@@ -44,22 +44,22 @@ public class ReasonController {
     }
 
 
-    @ApiOperation("添加事故原因")
-    @PostMapping("add")
-    public Result<String> addReason(ReasonParam param) {
-        Reason reason = new Reason();
-        BeanUtils.copyProperties(param, reason);
-        reason.setReaid(UUID.randomUUID().toString());
-        reasonMapper.insertSelective(reason);
-        return Result.createBySuccess();
-    }
+//    @ApiOperation("添加事故原因")
+//    @PostMapping("add")
+//    public Result<String> addReason(ReasonParam param) {
+//        Reason reason = new Reason();
+//        BeanUtils.copyProperties(param, reason);
+//        reason.setReaid(UUID.randomUUID().toString());
+//        reasonMapper.insertSelective(reason);
+//        return Result.createBySuccess();
+//    }
 
-    @ApiOperation("更新事故原因")
-    @PostMapping("update")
-    public Result<String> updateReason(Reason param) {
-        reasonMapper.updateByPrimaryKeySelective(param);
-        return Result.createBySuccess();
-    }
+//    @ApiOperation("更新事故原因")
+//    @PostMapping("update")
+//    public Result<String> updateReason(Reason param) {
+//        reasonMapper.updateByPrimaryKeySelective(param);
+//        return Result.createBySuccess();
+//    }
 //
 //    @ApiOperation("删除事故原因")
 //    @PostMapping("delete")
