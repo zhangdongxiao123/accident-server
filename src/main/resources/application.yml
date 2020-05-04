@@ -1,0 +1,45 @@
+server:
+  port: 8889
+spring:
+  jackson:
+    dateFormat: yyyy-MM-dd HH:mm:ss # 对返回的时间格式化
+    timeZone: GMT+8 # 时区设置
+    defaultPropertyInclusion: non_null
+  cache:
+    type: redis
+  servlet:
+    multipart:
+      max-file-size: 10000MB
+      max-request-size: 10000MB
+  datasource: # 数据源
+    url: jdbc:mysql://${db_host:118.31.34.76}:${db_port:3306}/${db_name:accident}?useunicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai
+    username: ${db_username:accident}
+    password: ${db_password:accident@2020}
+    driverClassName: com.mysql.cj.jdbc.Driver # 驱动
+  jpa:
+    hibernate:
+      ddl-auto: update
+# 配置接口文档
+swagger:
+  enabled: true
+  base-package: com.coding.controller
+  ui-config:
+    request-timeout: 20000
+app:
+  title: 航空事故服务器
+
+
+logging:
+  level:
+    com.coding: info
+    com.coding.mapper: debug
+mapper:
+  mappers:
+    - tk.mybatis.mapper.common.Mapper
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    use-generated-keys: true
+    use-column-label: true
+  mapper-locations: mapper/*.xml # SQL语句和代码分开，单独放到mapper里面、
+
