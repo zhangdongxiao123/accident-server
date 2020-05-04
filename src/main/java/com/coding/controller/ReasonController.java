@@ -53,13 +53,13 @@ public class ReasonController {
         reasonMapper.insertSelective(reason);
         return Result.createBySuccess();
     }
-//
-//    @ApiOperation("更新事故原因")
-//    @PostMapping("update")
-//    public Result<String> updateReason(Reason param) {
-//        reasonMapper.updateByPrimaryKeySelective(param);
-//        return Result.createBySuccess();
-//    }
+
+    @ApiOperation("更新事故原因")
+    @PostMapping("update")
+    public Result<String> updateReason(Reason param) {
+        reasonMapper.updateByPrimaryKeySelective(param);
+        return Result.createBySuccess();
+    }
 //
 //    @ApiOperation("删除事故原因")
 //    @PostMapping("delete")
