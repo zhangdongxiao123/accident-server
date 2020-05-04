@@ -27,7 +27,7 @@ import tk.mybatis.mapper.weekend.WeekendSqls;
 
 import java.util.List;
 
-@Slf4j
+@Slf4j //log需要使用
 @Api(tags = "事故详情接口")
 @AllArgsConstructor
 @RestController
