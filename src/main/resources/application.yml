@@ -12,9 +12,9 @@ spring:
       max-file-size: 10000MB
       max-request-size: 10000MB
   datasource: # 数据源
-    url: jdbc:mysql://${db_host:118.31.34.76}:${db_port:3306}/${db_name:accident}?useunicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai
-    username: ${db_username:accident}
-    password: ${db_password:accident@2020}
+    url: jdbc:mysql://${db_host:cdb-boq0qdam.bj.tencentcdb.com}:${db_port:10127}/${db_name:airtext}?useunicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai
+    username: ${db_username:root}
+    password: ${db_password:12345678Aa}
     driverClassName: com.mysql.cj.jdbc.Driver # 驱动
   jpa:
     hibernate:

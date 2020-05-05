@@ -32,16 +32,17 @@ import java.util.UUID;
  */
 @Slf4j
 @Api(tags = "事故原因接口")
+@AllArgsConstructor
 @RestController
 @RequestMapping(Const.API + "reason")
 public class ReasonController {
     private final ReasonMapper reasonMapper;
     private final UserService userService;
 
-    public ReasonController(ReasonMapper reasonMapper, UserService userService) {
-        this.reasonMapper = reasonMapper;
-        this.userService = userService;
-    }
+//    public ReasonController(ReasonMapper reasonMapper, UserService userService) {
+//        this.reasonMapper = reasonMapper;
+//        this.userService = userService;
+//    }
 
 
 //    @ApiOperation("添加事故原因")

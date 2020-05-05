@@ -27,7 +27,7 @@ import tk.mybatis.mapper.weekend.WeekendSqls;
 
 import java.util.List;
 
-@Slf4j //log需要使用
+@Slf4j //lombok的一个注解，log需要使用
 @Api(tags = "事故详情接口")
 @AllArgsConstructor
 @RestController
@@ -54,9 +54,9 @@ public class AirdetailController {
         return Result.createBySuccess();
     }
 
-    private boolean checkReasonExist(String airtype) {
+    private boolean checkReasonExist(String airwhy) {
         Reason record=new Reason();
-        record.setReaname(airtype);
+        record.setReaname(airwhy);
         return reasonMapper.selectCount(record)>0;
     }
 

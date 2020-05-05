@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * 过滤器，放行，doFilter使request和response能够正确往下执行
+ */
+
 @Slf4j
 @Component
 public class RequestFilter extends OncePerRequestFilter {
