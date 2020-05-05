@@ -27,7 +27,7 @@ import tk.mybatis.mapper.weekend.WeekendSqls;
 
 import java.util.List;
 
-@Slf4j //lombok的一个注解，log需要使用
+@Slf4j //lombok的一个注解，log需要使用，注释一下
 @Api(tags = "事故详情接口")
 @AllArgsConstructor
 @RestController
