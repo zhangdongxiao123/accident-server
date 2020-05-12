@@ -8,24 +8,21 @@ import com.coding.domain.Type;
 import com.coding.mapper.AirdetailMapper;
 import com.coding.mapper.ReasonMapper;
 import com.coding.mapper.TypeMapper;
-import com.coding.pojo.param.ReasonParam;
-import com.coding.service.UserService;
+import com.coding.service.ManagerService;
 import com.guanweiming.common.utils.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import org.springframework.stereotype.Controller;
-import springfox.documentation.annotations.ApiIgnore;
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.weekend.WeekendSqls;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j //lombok的一个注解，log需要使用
 @Api(tags = "事故详情接口")
@@ -33,23 +30,29 @@ import java.util.List;
 @RestController
 @RequestMapping(Const.API + "airdetail")
 public class AirdetailController {
-    private final UserService userService;
+    private final ManagerService managerService;
     private final AirdetailMapper airdetailMapper;
     private final TypeMapper typeMapper;
     private final ReasonMapper reasonMapper;
 
     @ApiOperation("添加事故详情")
     @PostMapping("add")
-    public Result<String> addAirdetail(Airdetail param) {
-        if(!checkTypeExist(param.getAirtype())){
+    public Result<String> addAirdetail(String airname, String airtype, String airwhen, String airwhere, String airwhy,String airhow,String airimg) {
+        if(!checkTypeExist(airtype)){
             return Result.createByErrorMessage("事故类型不存在");
         }
-        if(!checkReasonExist(param.getAirwhy())){
+        if(!checkReasonExist(airwhy)){
             return Result.createByErrorMessage("事故原因不存在");
         }
-        if(airdetailMapper.selectByPrimaryKey(param.getAirid())!=null){
-            return Result.createByErrorMessage("id已经存在");
-        }
+        Airdetail param=new Airdetail();
+        param.setAirid(UUID.randomUUID().toString());
+        param.setAirname(airname);
+        param.setAirtype(airtype);
+        param.setAirwhen(airwhen);
+        param.setAirwhere(airwhere);
+        param.setAirwhy(airwhy);
+        param.setAirhow(airhow);
+        param.setAirimg(airimg);
         airdetailMapper.insertSelective(param);
         return Result.createBySuccess();
     }
@@ -110,18 +113,64 @@ public class AirdetailController {
     @ApiOperation("多条件查询")
     @GetMapping("allselect")
     public Result<List<Airdetail>> airwhyselect(String airname, String airtype, String airwhen, String airwhere, String airwhy) {
-        Example record = Example.builder(Airdetail.class)
-                .where(WeekendSqls.<Airdetail>custom()
-                        .andLike(Airdetail::getAirname, "%" + airname + "%")
-                        .andLike(Airdetail::getAirtype, "%" + airtype + "%")
-                        .andLike(Airdetail::getAirwhen, "%" + airwhen + "%")
-                        .andLike(Airdetail::getAirwhere, "%" + airwhere + "%")
-                        .andLike(Airdetail::getAirwhy, "%" + airwhy + "%")
-                )
-                .build();
 
-        List<Airdetail> list=airdetailMapper.selectByExample(record);
-        return Result.createBySuccess(list);
+        List<Airdetail>list =new ArrayList<>();
+        List<Airdetail>list1=new ArrayList<>();
+        List<Airdetail>list2=new ArrayList<>();
+        List<Airdetail>list3=new ArrayList<>();
+        List<Airdetail>list4=new ArrayList<>();
+
+        if(!StringUtils.isBlank(airname)){
+            Example record = Example.builder(Airdetail.class)
+                    .where(WeekendSqls.<Airdetail>custom()
+                            .andLike(Airdetail::getAirname, "%" + airname + "%")
+                    )
+                    .build();
+            list=airdetailMapper.selectByExample(record);
+        }else {
+            list=airdetailMapper.selectAll();
+        }
+        if(!StringUtils.isBlank(airtype)){
+            for (int i = 0; i < list.size(); i++){
+                String type =list.get(i).getAirtype();
+                if(type.contains(airtype)){
+                    list1.add(list.get(i));
+                }
+            }
+        } else {
+            list1.addAll(list);
+        }
+        if(!StringUtils.isBlank(airwhen)){
+            for (int i = 0; i < list1.size(); i++){
+                String when =list1.get(i).getAirwhen();
+                if(when.contains(airwhen)){
+                    list2.add(list1.get(i));
+                }
+            }
+        } else {
+            list2.addAll(list1);
+        }
+        if(!StringUtils.isBlank(airwhere)){
+            for (int i = 0; i < list2.size(); i++){
+                String where =list2.get(i).getAirwhere();
+                if(where.contains(airwhere)){
+                    list3.add(list2.get(i));
+                }
+            }
+        } else {
+            list3.addAll(list2);
+        }
+        if(!StringUtils.isBlank(airwhy)){
+            for (int i = 0; i < list3.size(); i++){
+                String why =list3.get(i).getAirwhy();
+                if(why.contains(airwhy)){
+                    list4.add(list3.get(i));
+                }
+            }
+        } else {
+            list4.addAll(list3);
+        }
+        return Result.createBySuccess(list4);
     }
 
     @ApiOperation(value = "单条件查询", notes = "只需要传入关键字，会匹配事故详情的所有的数据，找出能匹配上的")
@@ -148,7 +197,7 @@ public class AirdetailController {
     @ApiOperation("事故详情")
     @PostMapping("airdetailDetail")
     public Result<Airdetail> AirdetailDetail(String airid) {
-        Airdetail airdetail = userService.Detail(airid);
+        Airdetail airdetail = managerService.Detail(airid);
         if (airdetail == null) {
             return Result.createByErrorMessage("找不到");
         }

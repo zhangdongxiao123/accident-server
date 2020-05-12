@@ -2,27 +2,17 @@ package com.coding.controller;
 
 
 import com.coding.common.Const;
-import com.coding.domain.Airdetail;
 import com.coding.domain.Reason;
 import com.coding.mapper.ReasonMapper;
-import com.coding.pojo.param.ReasonParam;
-import com.coding.service.UserService;
+import com.coding.service.ManagerService;
 import com.guanweiming.common.utils.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import org.springframework.stereotype.Controller;
-import springfox.documentation.annotations.ApiIgnore;
-import tk.mybatis.mapper.entity.Example;
-import tk.mybatis.mapper.weekend.WeekendSqls;
-
 import java.util.List;
-import java.util.UUID;
 
 /**
  * <p>
@@ -37,7 +27,7 @@ import java.util.UUID;
 @RequestMapping(Const.API + "reason")
 public class ReasonController {
     private final ReasonMapper reasonMapper;
-    private final UserService userService;
+    private final ManagerService managerService;
 
 //    public ReasonController(ReasonMapper reasonMapper, UserService userService) {
 //        this.reasonMapper = reasonMapper;

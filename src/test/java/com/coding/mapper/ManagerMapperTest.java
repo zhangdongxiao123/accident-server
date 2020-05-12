@@ -26,7 +26,7 @@ public class ManagerMapperTest {
     public void selectTest() {
         /*模糊查询*/
 
-        String key="123";
+        String key="一架";
         Example example = Example.builder(Airdetail.class)
                 .where(WeekendSqls.<Airdetail>custom()
                         .andLike(Airdetail::getAirhow, "%" + key + "%")
@@ -34,7 +34,12 @@ public class ManagerMapperTest {
                 .build();
 
         List<Airdetail> resultList = airdetailMapper.selectByExample(example);
-        System.out.println(resultList);
+
+        for (Airdetail airdetail : resultList) {
+            System.out.println(airdetail);
+
+        }
+
     }
 
 }

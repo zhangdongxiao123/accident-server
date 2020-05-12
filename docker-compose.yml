@@ -6,8 +6,8 @@ services:
     ports:
       - "10099:8889/tcp"
     environment:
-      - db_host=118.31.34.76
-      - db_port=3306
-      - db_name=accident
-      - db_username=accident
-      - db_password=accident@2020
+      - db_host=cdb-boq0qdam.bj.tencentcdb.com
+      - db_port=10127
+      - db_name=airtext
+      - db_username=root
+      - db_password=12345678Aa
