@@ -53,7 +53,7 @@ public class UserController {
             return Result.createByErrorMessage("没有该用户");
         }
         if (!Objects.equals(user.getUserpwd(), userpwd)) {
-            return Result.createByErrorMessage("普通用户登录失败");
+            return Result.createByErrorMessage("普通用户密码错误");
         }
         return Result.createBySuccess(user);
     }

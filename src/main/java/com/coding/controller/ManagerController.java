@@ -44,14 +44,14 @@ public class ManagerController {
             @RequestParam String manpwd) {
         //调用userService 的方法完成登录逻辑
         if (StringUtils.isBlank(manacct)) {
-            return Result.createByErrorMessage("管理员登录失败");
+            return Result.createByErrorMessage("管理员账号不能为空");
         }
         Manager manager = managerService.findManagerByName(manacct);
             if (manager == null) {
-            return Result.createByErrorMessage("管理员登录失败");
+            return Result.createByErrorMessage("没有该管理员的信息");
         }
         if (!Objects.equals(manager.getManpwd(), manpwd)) {
-            return Result.createByErrorMessage("管理员登录失败");
+            return Result.createByErrorMessage("管理员密码错误");
         }
         return Result.createBySuccess(manager);
     }
