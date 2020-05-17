@@ -4,7 +4,7 @@ services:
     restart: always
     image: registry.cn-beijing.aliyuncs.com/guanweiming/accident-server:1.0
     ports:
-      - "10099:8889/tcp"
+      - "10127:8889/tcp"
     environment:
       - db_host=cdb-boq0qdam.bj.tencentcdb.com
       - db_port=10127
