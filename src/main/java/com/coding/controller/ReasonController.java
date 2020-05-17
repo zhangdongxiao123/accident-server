@@ -58,20 +58,20 @@ public class ReasonController {
         return Result.createBySuccess();
     }
 
-    @ApiOperation(value = "单条件查询", notes = "只需要传入关键字，会匹配事故详情的所有的数据，找出能匹配上的")
-    @GetMapping("singleSelect")
-    public Result<List<Reason>> singleSelect(String keyword) {
-        Example record = Example.builder(Reason.class)
-                .where(WeekendSqls.<Reason>custom()
-                        .orLike(Reason::getReaid, "%" + keyword + "%")
-                        .orLike(Reason::getReaname, "%" + keyword + "%")
-                        .orLike(Reason::getReahow, "%" + keyword + "%")
-                )
-                .build();
-
-        List<Reason> list = reasonMapper.selectByExample(record);
-        return Result.createBySuccess(list);
-    }
+//    @ApiOperation(value = "单条件查询", notes = "只需要传入关键字，会匹配事故详情的所有的数据，找出能匹配上的")
+//    @GetMapping("singleSelect")
+//    public Result<List<Reason>> singleSelect(String keyword) {
+//        Example record = Example.builder(Reason.class)
+//                .where(WeekendSqls.<Reason>custom()
+//                        .orLike(Reason::getReaid, "%" + keyword + "%")
+//                        .orLike(Reason::getReaname, "%" + keyword + "%")
+//                        .orLike(Reason::getReahow, "%" + keyword + "%")
+//                )
+//                .build();
+//
+//        List<Reason> list = reasonMapper.selectByExample(record);
+//        return Result.createBySuccess(list);
+//    }
 
     @ApiOperation(value = "查询所有原因")
     @GetMapping("all")
